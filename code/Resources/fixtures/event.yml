@@ -1,0 +1,11 @@
+App\Entity\Event:
+    event_{0..11}:
+        __construct:
+            0: <getEventName(<current()>)>
+            1: <getNumber(<current()>)>
+            2: '@user_<numberBetween(0,13)>'
+            3: <(new \DateTime('2018-01-02'))>
+            4: <(new \DateTime('2018-01-02'))>
+            5: <paragraph()>
+            6: ['@resource_link_0', '@resource_link_1']
+            7: <getLocation(<current()>)>

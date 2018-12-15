@@ -1,0 +1,9 @@
+App\Entity\Wifi:
+    type: embeddable
+    fields:
+        name:
+            type: string
+        login:
+            type: string
+        password:
+            type: string

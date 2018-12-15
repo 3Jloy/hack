@@ -49,18 +49,17 @@ class AuthenticationService implements ApplicationServiceInterface
      */
     public function invoke(Request $request)
     {
-        return new BaseResponse([], 400, 'Не передан обязательный параметр: phone');
-        $phone = $request->get('phone');
         $email = $request->get('email');
-        if ($phone && $email) {
-            if ($code = $request->get('code')) {
-                return $this->validateCode($phone, $code);
+        if ($email) {
+            try {
+                $this->initializeUser($email);
+                return new BaseResponse([['token' => $this->generateToken($email)]]);
+            } catch (\Exception $exception) {
+                return new BaseResponse([], 500, 'Обратись к Юрцу');
             }
-
-            return $this->initializeUser($phone);
         }
 
-        return new BaseResponse([], 400, 'Не передан обязательный параметр: phone');
+        return new BaseResponse([], 400, 'Не передан обязательный параметр: email');
     }
 
     /**
@@ -105,6 +104,7 @@ class AuthenticationService implements ApplicationServiceInterface
         }
 
         $user = new User($email);
+        $user->setIsMentor(false);
         $this->userRepository->save($user);
         $this->smsCodeStorage->set($email, $code);
         return new BaseResponse([], Response::HTTP_CREATED);

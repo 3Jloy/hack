@@ -1,7 +1,7 @@
-App\Entity\Course:
-    table: cources
+App\Entity\Region:
+    table: regions
     type: entity
-    repositoryClass: App\Repository\CourseRepository
+    repositoryClass: App\Repository\RegionRepository
     id:
         id:
             type: integer

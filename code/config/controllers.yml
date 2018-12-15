@@ -5,3 +5,7 @@ services:
         class: App\Controller\PublicController
         arguments:
             - '@app.security.authentication_service'
+    app.mentors.controller:
+        class: App\Controller\SecuredController
+        arguments:
+            - '@App\Service\MentorsService'

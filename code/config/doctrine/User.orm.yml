@@ -39,5 +39,5 @@ App\Entity\User:
             options:
                 default: 0
         homeWorks:
-            type: string
+            type: simple_array
             nullable: true

@@ -1,0 +1,9 @@
+App\Entity\User:
+    user_{0..13}:
+        __construct:
+            0: '<email()>'
+        name: '<mentorName(<current()>)>'
+        surname: '<mentorSurname(<current()>)>'
+        current_job: '<mentorJob(<current()>)>'
+        photo: '<mentorPhoto(<current()>)>'
+        is_mentor: true

@@ -9,6 +9,18 @@ services:
             - '@app.infrastructure.storage.redis_sms_code'
             - '@App\Security\Validator\SmsCodeValidator'
 
-    data_fixtures.provider.category:
-        class: App\DataFixtures\Faker\Provider\CategoryProvider
+    data_fixtures.provider.user:
+        class: App\DataFixtures\Faker\Provider\UserProvider
+        tags: [ { name: nelmio_alice.faker.provider } ]
+
+    data_fixtures.provider.course:
+        class: App\DataFixtures\Faker\Provider\CourseProvider
+        tags: [ { name: nelmio_alice.faker.provider } ]
+
+    data_fixtures.provider.resource_link:
+        class: App\DataFixtures\Faker\Provider\ResourceLinkProvider
+        tags: [ { name: nelmio_alice.faker.provider } ]
+
+    data_fixtures.provider.event:
+        class: App\DataFixtures\Faker\Provider\EventProvider
         tags: [ { name: nelmio_alice.faker.provider } ]

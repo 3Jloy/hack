@@ -36,6 +36,14 @@ class UserRepository extends ServiceEntityRepository
         return $user;
     }
 
+    /**
+     * @return array
+     */
+    public function getMentors(): array
+    {
+        return $this->findBy(['is_mentor' => true]);
+    }
+
     /*
     public function findBySomething($value)
     {

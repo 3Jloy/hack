@@ -1,0 +1,6 @@
+App\Entity\ResourceLink:
+    resource_link_{0..11}:
+        __construct:
+            0: <resourceTitle(<current()>)>
+            1: <resourceLink(<current()>)>
+            2: <resourceType(<current()>)>

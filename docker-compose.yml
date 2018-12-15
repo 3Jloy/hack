@@ -6,7 +6,7 @@ services:
         container_name: ${APP_NAME}
         environment:
             PHP_IDE_CONFIG: "serverName=android-academy.local"
-            XDEBUG_CONFIG: "remote_host=192.168.13.243"
+            XDEBUG_CONFIG: "remote_host=192.168.4.194"
         volumes:
             - ./code:/var/www/${APP_NAME}:cached
     nginx:

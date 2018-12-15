@@ -2,3 +2,8 @@ auth:
     path: /auth
     defaults: {_controller: 'app.authentication.controller:invoke'}
     methods: [POST]
+
+mentors:
+    path: /mentors
+    defaults: {_controller: 'app.mentors.controller:invoke'}
+    methods: [GET]

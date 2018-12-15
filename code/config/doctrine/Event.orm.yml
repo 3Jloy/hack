@@ -1,0 +1,43 @@
+App\Entity\Event:
+    table: events
+    type: entity
+    repositoryClass: App\Repository\EventRepository
+    id:
+        id:
+            type: integer
+            generator: {strategy: AUTO}
+    fields:
+        title:
+            type: string
+            length: 50
+        number:
+            type: integer
+        startDate:
+            type: date
+        endDate:
+            type: date
+        description:
+            type: text
+        notes:
+            type: simple_array
+            nullable: true
+    manyToOne:
+        mentor:
+            targetEntity: App\Entity\User
+            joinColumn:
+                name: mentor
+                referencedColumnName: id
+    manyToMany:
+        resources_links:
+            targetEntity: App\Entity\ResourceLink
+            joinTable:
+                name: events_resourselinks
+                joinColumns:
+                    event_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    resourselink_id:
+                        referencedColumnName: id
+    embedded:
+        location:
+            class: App\Entity\Location

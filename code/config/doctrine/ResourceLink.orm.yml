@@ -1,0 +1,15 @@
+App\Entity\ResourceLink:
+    table: resourselinks
+    type: entity
+    repositoryClass: App\Repository\ResourceLinkRepository
+    id:
+        id:
+            type: integer
+            generator: {strategy: AUTO}
+    fields:
+        title:
+            type: string
+        link:
+            type: string
+        type:
+            type: integer

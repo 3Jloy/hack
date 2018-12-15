@@ -2,37 +2,15 @@
 
 namespace App\DataFixtures\Faker\Provider;
 
-class CategoryProvider
+class CourseProvider
 {
-    private static $categories = [
-        'Халяль',
-        'Кошерное',
-        'Вегетарианское меню',
-        'Здоровая еда',
-        'Пицца',
-        'Суши',
-        'Бургеры',
-        'Рыба',
-        'Хинкали',
-        'Пироги',
-        'Шашлыки',
-        'Плов',
-        'Паста и ризотто',
-        'Паназиатская',
-        'Грузинская',
-        'Китайская',
-        'Корейская',
-        'Вьетнамская',
-        'Японская',
-        'Индийская',
-        'Русская',
-        'Итальянская',
-        'Обеды',
-        'Завтраки',
+    private static $courses = [
+        'Fundamentals',
+        'Advanced',
     ];
 
-    public static function category()
+    public static function courseName()
     {
-        return array_shift(static::$categories);
+        return array_shift(static::$courses);
     }
 }

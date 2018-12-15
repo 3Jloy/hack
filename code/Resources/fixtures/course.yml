@@ -1,3 +1,6 @@
-App\Entity\Category:
-    category_{1..20}:
-        __construct: ['<category()>']
+App\Entity\Course:
+    course_{1..2}:
+        __construct:
+            0: '<courseName()>'
+            1: <(new \DateTime('2018-01-02'))>
+            2: <(new \DateTime('2018-12-02'))>

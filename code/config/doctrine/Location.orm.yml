@@ -1,0 +1,21 @@
+App\Entity\Location:
+    type: embeddable
+    fields:
+        title:
+            type: string
+        logo:
+            type: string
+            nullable: true
+        long:
+            type: decimal
+            precision: 10
+            scale: 7
+        lat:
+            type: decimal
+            precision: 10
+            scale: 7
+        description:
+            type: string
+    embedded:
+        wifi:
+            class: App\Entity\Wifi
