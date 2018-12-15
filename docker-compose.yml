@@ -13,7 +13,7 @@ services:
         build: ./docker/${APP_ENV}/nginx
         container_name: ${APP_NAME}-nginx
         ports:
-            - 80:80
+            - 8008:8008
         links:
             - android-academy
         volumes:
