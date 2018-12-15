@@ -1,0 +1,14 @@
+services:
+    app.security.authentication_service:
+        class: App\Security\Service\AuthenticationService
+        public: true
+        arguments:
+            - '@sb_redis.client.default'
+            - '@App\Repository\UserRepository'
+            - '@App\Security\Generator\SmsCodeGenerator'
+            - '@app.infrastructure.storage.redis_sms_code'
+            - '@App\Security\Validator\SmsCodeValidator'
+
+    data_fixtures.provider.category:
+        class: App\DataFixtures\Faker\Provider\CategoryProvider
+        tags: [ { name: nelmio_alice.faker.provider } ]

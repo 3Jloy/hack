@@ -1,0 +1,4 @@
+auth:
+    path: /auth
+    defaults: {_controller: 'app.authentication.controller:invoke'}
+    methods: [POST]

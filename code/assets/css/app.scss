@@ -1,0 +1,10 @@
+@import "~bootstrap/scss/bootstrap";
+@import "variables";
+@import "navbar";
+
+body {
+  background-color: #f8f8f8;
+  .test {
+    background: #000;
+  }
+}

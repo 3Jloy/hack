@@ -1,0 +1,43 @@
+App\Entity\User:
+    table: users
+    type: entity
+    repositoryClass: App\Repository\UserRepository
+    id:
+        id:
+            type: integer
+            generator: {strategy: AUTO}
+    fields:
+        name:
+            type: string
+            length: 50
+            nullable: true
+        surname:
+            type: string
+            length: 50
+            nullable: true
+        phone:
+            type: string
+            length: 20
+            unique: true
+            nullable: true
+        email:
+            type: string
+            length: 30
+            unique: true
+        photo:
+            type: string
+            nullable: true
+        current_job:
+            type: string
+            length: 50
+            nullable: true
+        about:
+            type: string
+            nullable: true
+        is_mentor:
+            type: boolean
+            options:
+                default: 0
+        homeWorks:
+            type: string
+            nullable: true

@@ -1,0 +1,273 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Swapp API",
+        "version": "1.0.0",
+        "title": "Swapp API",
+        "contact": {
+            "email": "3jloy.01@gmail.com"
+        }
+    },
+    "host": "swapp.dev",
+    "basePath": "/",
+    "schemes": ["http"],
+    "paths": {
+        "/auth": {
+            "post": {
+                "tags": ["authorization"],
+                "summary": "Создание пользователя и авторизация",
+                "operationId": "",
+                "parameters": [
+                    {
+                        "name": "phone",
+                        "in": "formData",
+                        "type": "string",
+                        "required": "true",
+                        "description": "Номер телефона пользователя"
+                    },
+                    {
+                        "name": "code",
+                        "in": "formData",
+                        "type": "string",
+                        "description": "Код подтверждения номера телефона"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Авторизация прошла успешно",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "result": {
+                                    "type": "object",
+                                    "properties": {
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Пользователь был создан и ему отправлен код по смс (при запросе без параметра code)",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "result": {
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Не верный код подтверждения",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "result": {
+                                    "type": "object",
+                                    "properties": {
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/categories": {
+            "get": {
+                "tags": ["categories"],
+                "summary": "Получаем список категорий",
+                "description": "Все опубликованные категории",
+                "produces": ["application/json"],
+                "parameters": [
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                      "type": "integer",
+                                      "format": "int32"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "result": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Category"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/organizations": {
+            "get": {
+                "tags": ["organizations"],
+                "summary": "Получаем список организаций",
+                "parameters": [
+                    {
+                        "name": "count",
+                        "in": "query",
+                        "type": "integer",
+                        "description": "Кол-во на странице",
+                        "default": "10"
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "type": "integer",
+                        "description": "С какого по счету начать выборку",
+                        "default": "0"
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Сортировка",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "enum": ["alphabet", "distance", "wallet"]
+                        },
+                        "default": "alphabet"
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "query",
+                        "type": "number",
+                        "description": "Долгота для сортировки по удаленности (учитывается только для сортировки \"distance\")"
+                    },
+                    {
+                        "name": "latitude",
+                        "in": "query",
+                        "type": "number",
+                        "description": "Штрота для сортировки по удаленности (учитывается только для сортировки \"distance\")"
+                    },
+                    {
+                        "name": "categories",
+                        "in": "query",
+                        "type": "string",
+                        "description": "Фильтр организаций по категориям (список id категорий разделенных ,)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                },
+                                "message": {
+                                    "type": "string"
+                                },
+                                "result": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Organization"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Category": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "Organization": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "logo": {
+                    "type": "string"
+                },
+                "longitude": {
+                    "type": "string"
+                },
+                "latitude": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "main_photo": {
+                    "type": "string"
+                },
+                "categories": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Category"
+                    }
+                }
+            }
+        },
+        "ApiResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "result": {
+                    "type": "object"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

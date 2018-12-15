@@ -1,0 +1,25 @@
+App\Entity\Course:
+    table: cources
+    type: entity
+    repositoryClass: App\Repository\CourseRepository
+    id:
+        id:
+            type: integer
+            generator: {strategy: AUTO}
+    fields:
+        title:
+            type: string
+            length: 50
+        startDate:
+            type: string
+            length: 50
+        endDate:
+            type: string
+            length: 20
+            unique: true
+    manyToOne:
+        region:
+            targetEntity: App\Entity\Region
+            joinColumn:
+                name: region
+                referencedColumnName: id

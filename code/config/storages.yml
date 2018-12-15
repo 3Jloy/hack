@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+    app.infrastructure.storage.redis_sms_code:
+        class: App\Infrastructure\Storage\RedisSmsCodeStorage
+        public: true
+        arguments:
+            - '@sb_redis.client.default'

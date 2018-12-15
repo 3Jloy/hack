@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+    app.authentication.controller:
+        class: App\Controller\PublicController
+        arguments:
+            - '@app.security.authentication_service'

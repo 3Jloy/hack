@@ -1,0 +1,12 @@
+App\Entity\Course:
+    table: cources
+    type: entity
+    repositoryClass: App\Repository\CourseRepository
+    id:
+        id:
+            type: integer
+            generator: {strategy: AUTO}
+    fields:
+        title:
+            type: string
+            length: 50

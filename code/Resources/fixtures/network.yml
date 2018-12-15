@@ -1,0 +1,4 @@
+App\Entity\Network:
+    network_{1..10}:
+        __construct:
+            0 (unique): '<ru_RU:company()>'
