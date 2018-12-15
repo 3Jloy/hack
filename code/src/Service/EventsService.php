@@ -55,6 +55,12 @@ class EventsService implements SecuredApplicationServiceInterface
                     'is_mentor' => $event->getMentor()->isMentor(),
                     'homeWorks' => []
                 ],
+                'location' => [
+                    'title' => $event->getLocation()->getTitle(),
+                    'lat' => $event->getLocation()->getLat(),
+                    'long' => $event->getLocation()->getLong(),
+                    'description' => $event->getLocation()->getDescription(),
+                ],
                 'number' => $event->getNumber(),
                 'startDate' => $event->getStartDate()->getTimestamp(),
                 'endDate' => $event->getEndDate()->getTimestamp(),

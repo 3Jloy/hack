@@ -12,3 +12,8 @@ events:
     path: /events
     defaults: {_controller: 'app.events.controller:invoke'}
     methods: [GET]
+
+event:
+    path: /event
+    defaults: {_controller: 'app.event.controller:invoke'}
+    methods: [GET]

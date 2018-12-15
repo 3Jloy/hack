@@ -25,6 +25,15 @@ class EventRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param $id
+     * @return Event|null
+     */
+    public function getEvent($id): ?Event
+    {
+        return $this->find($id);
+    }
+
+    /**
      * @return array
      */
     public function getEvents(): array
