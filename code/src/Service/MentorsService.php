@@ -18,6 +18,7 @@ class MentorsService implements SecuredApplicationServiceInterface
     }
 
     /**
+     * @param User $user
      * @param Request $request
      * @return \App\Response\BaseResponse;
      */

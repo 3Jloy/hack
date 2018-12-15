@@ -4,19 +4,28 @@ namespace App\Service;
 
 use App\Entity\Event;
 use App\Repository\EventRepository;
+use App\Repository\EventTicketRepository;
+use App\Repository\UserRepository;
 use App\Response\BaseResponse;
 use App\Security\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 
 class EventsService implements SecuredApplicationServiceInterface
 {
-
-    /** @var EventRepository  */
     private $eventRepository;
 
-    public function __construct(EventRepository $eventRepository)
-    {
+    private $userRepository;
+
+    private $ticketRepository;
+
+    public function __construct(
+        UserRepository $userRepository,
+        EventRepository $eventRepository,
+        EventTicketRepository $ticketRepository
+    ) {
+        $this->userRepository = $userRepository;
         $this->eventRepository = $eventRepository;
+        $this->ticketRepository = $ticketRepository;
     }
 
     /**
@@ -27,7 +36,10 @@ class EventsService implements SecuredApplicationServiceInterface
     public function invoke(User $user, Request $request): BaseResponse
     {
         $events = $this->eventRepository->getEvents();
-        $events = array_map(function (Event $event) {
+        $currentUser = $this->userRepository->findByEmail($user->getEmail());
+        $userTickets = $this->ticketRepository->getUserTickets($currentUser);
+        //todo: распределить билеты по пользователям и эвентам
+        $events = array_map(function (Event $event)  {
             return [
                 'id' => $event->getId(),
                 'title' => $event->getTitle(),
@@ -46,6 +58,7 @@ class EventsService implements SecuredApplicationServiceInterface
                 'number' => $event->getNumber(),
                 'startDate' => $event->getStartDate()->getTimestamp(),
                 'endDate' => $event->getEndDate()->getTimestamp(),
+                'ticket' => null
             ];
         }, $events);
 

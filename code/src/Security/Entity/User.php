@@ -9,25 +9,25 @@ class User implements UserInterface
     /**
      * @var string
      */
-    private $phone;
+    private $email;
 
     /**
      * @var string
      */
     private $apiKey;
 
-    public function __construct($phone, $apiKey)
+    public function __construct($email, $apiKey)
     {
-        $this->phone = $phone;
+        $this->email = $email;
         $this->apiKey = $apiKey;
     }
 
     /**
      * @return string
      */
-    public function getPhone()
+    public function getEmail()
     {
-        return $this->phone;
+        return $this->email;
     }
 
     /**

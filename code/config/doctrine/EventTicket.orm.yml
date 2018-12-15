@@ -1,0 +1,8 @@
+App\Entity\EventTicket:
+    table: event_tickets
+    type: entity
+    repositoryClass: App\Repository\EventTicketRepository
+    id:
+        id:
+            type: integer
+            generator: {strategy: AUTO}
