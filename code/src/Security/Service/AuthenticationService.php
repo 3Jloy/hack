@@ -53,7 +53,7 @@ class AuthenticationService implements ApplicationServiceInterface
         if ($email) {
             try {
                 $this->initializeUser($email);
-                return new BaseResponse([['token' => $this->generateToken($email)]]);
+                return new BaseResponse(['token' => $this->generateToken($email)]);
             } catch (\Exception $exception) {
                 return new BaseResponse([], 500, 'Обратись к Юрцу');
             }
