@@ -7,3 +7,8 @@ mentors:
     path: /mentors
     defaults: {_controller: 'app.mentors.controller:invoke'}
     methods: [GET]
+
+events:
+    path: /events
+    defaults: {_controller: 'app.events.controller:invoke'}
+    methods: [GET]

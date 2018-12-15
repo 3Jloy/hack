@@ -6,7 +6,7 @@ use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class UserRepository extends ServiceEntityRepository
+class EventRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
@@ -25,35 +25,10 @@ class UserRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param string $email
-     * @param string $phone
-     * @return User|null
-     */
-    public function findByEmail(string $email): ?User
-    {
-        /** @var User $user */
-        $user = $this->findOneBy(['email' => $email]);
-        return $user;
-    }
-
-    /**
      * @return array
      */
-    public function getMentors(): array
+    public function getEvents(): array
     {
-        return $this->findBy(['is_mentor' => true]);
+        return $this->findAll();
     }
-
-    /*
-    public function findBySomething($value)
-    {
-        return $this->createQueryBuilder('u')
-            ->where('u.something = :value')->setParameter('value', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 }

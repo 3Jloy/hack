@@ -2,15 +2,14 @@
 
 namespace App\Controller;
 
-use App\Service\ApplicationServiceInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Service\SecuredApplicationServiceInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class SecuredController extends BaseController
 {
     private $service;
 
-    public function __construct(ApplicationServiceInterface $service)
+    public function __construct(SecuredApplicationServiceInterface $service)
     {
         $this->service = $service;
     }
@@ -18,7 +17,7 @@ class SecuredController extends BaseController
     public function invoke(Request $request)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $response = $this->service->invoke($request);
+        $response = $this->service->invoke($this->getUser(), $request);
         return $this->json($response);
     }
 }

@@ -2,12 +2,12 @@
 
 namespace App\Service;
 
-use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Response\BaseResponse;
+use App\Security\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 
-class MentorsService implements ApplicationServiceInterface
+class MentorsService implements SecuredApplicationServiceInterface
 {
     /** @var UserRepository  */
     private $userRepository;
@@ -21,20 +21,20 @@ class MentorsService implements ApplicationServiceInterface
      * @param Request $request
      * @return \App\Response\BaseResponse;
      */
-    public function invoke(Request $request): BaseResponse
+    public function invoke(User $user, Request $request): BaseResponse
     {
         $mentors = $this->userRepository->getMentors();
-        $responseArray = array_map(function (User $user) {
+        $responseArray = array_map(function (\App\Entity\User $mentor) {
             return [
-                'id' => $user->getId(),
-                'name' => $user->getName(),
-                'surname' => $user->getSurname(),
-                'photo' => $user->getPhoto(),
-                'phone' => $user->getPhone(),
-                'email' => $user->getEmail(),
-                'current_job' => $user->getCurrentJob(),
-                'about' => $user->getAbout(),
-                'is_mentor' => $user->isMentor(),
+                'id' => $mentor->getId(),
+                'name' => $mentor->getName(),
+                'surname' => $mentor->getSurname(),
+                'photo' => $mentor->getPhoto(),
+                'phone' => $mentor->getPhone(),
+                'email' => $mentor->getEmail(),
+                'current_job' => $mentor->getCurrentJob(),
+                'about' => $mentor->getAbout(),
+                'is_mentor' => $mentor->isMentor(),
                 'homeWorks' => []
             ];
         }, $mentors);
