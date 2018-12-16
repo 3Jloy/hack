@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Event;
+use App\Entity\EventTicket;
 use App\Repository\EventRepository;
 use App\Repository\EventTicketRepository;
 use App\Repository\UserRepository;
@@ -43,8 +44,16 @@ class EventService implements SecuredApplicationServiceInterface
 
         $event = $this->eventRepository->getEvent($eventId);
         $currentUser = $this->userRepository->findByEmail($user->getEmail());
+        /** @var EventTicket[] $userTickets */
         $userTickets = $this->ticketRepository->getUserTickets($currentUser);
-        //todo: распределить билеты по пользователям и эвентам
+        $userTicket = null;
+        if (isset($userTickets[0])) {
+            $userTicket = [
+                'id' => $userTickets[0]->getId(),
+                'is_confirmed' => $userTickets[0]->isConfirmed(),
+                'is_visited' => $userTickets[0]->isVisited(),
+            ];
+        }
 
         $event = [
             'id' => $event->getId(),
@@ -76,7 +85,7 @@ class EventService implements SecuredApplicationServiceInterface
             'number' => $event->getNumber(),
             'startDate' => $event->getStartDate()->getTimestamp(),
             'endDate' => $event->getEndDate()->getTimestamp(),
-            'ticket' => null
+            'ticket' => $userTicket,
         ];
 
         return new BaseResponse($event);

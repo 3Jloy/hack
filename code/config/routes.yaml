@@ -42,3 +42,8 @@ add_note:
     path: /add-note
     defaults: {_controller: 'app.add_note.controller:invoke'}
     methods: [POST]
+
+vacancies:
+    path: /vacancies
+    defaults: {_controller: 'app.vacancies.controller:invoke'}
+    methods: [GET]

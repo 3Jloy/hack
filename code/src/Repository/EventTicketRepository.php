@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Event;
 use App\Entity\EventTicket;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -25,8 +26,12 @@ class EventTicketRepository extends ServiceEntityRepository
         $this->_em->flush();
     }
 
-    public function getUserTickets(User $user): array
+    public function getUserTickets(User $user, Event $event = null): array
     {
-        return $this->findBy(['user' => $user->getId()]);
+        $criteria = ['user' => $user->getId()];
+        if ($event) {
+            $criteria['event'] = $event->getId();
+        }
+        return $this->findBy($criteria);
     }
 }
