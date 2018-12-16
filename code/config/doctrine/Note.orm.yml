@@ -1,0 +1,22 @@
+App\Entity\Note:
+    table: notes
+    type: entity
+    repositoryClass: App\Repository\NoteRepository
+    id:
+        id:
+            type: integer
+            generator: {strategy: AUTO}
+    fields:
+        text:
+            type: text
+    manyToOne:
+        user:
+            targetEntity: App\Entity\User
+            joinColumn:
+                name: user
+                referencedColumnName: id
+        event:
+            targetEntity: App\Entity\Event
+            joinColumn:
+                name: event
+                referencedColumnName: id

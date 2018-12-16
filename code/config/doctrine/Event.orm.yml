@@ -18,9 +18,6 @@ App\Entity\Event:
             type: date
         description:
             type: text
-        notes:
-            type: simple_array
-            nullable: true
     manyToOne:
         mentor:
             targetEntity: App\Entity\User

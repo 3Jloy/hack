@@ -32,3 +32,13 @@ profile:
     path: /profile
     defaults: {_controller: 'app.profile.controller:invoke'}
     methods: [GET]
+
+notes:
+    path: /notes
+    defaults: {_controller: 'app.notes.controller:invoke'}
+    methods: [GET]
+
+add_note:
+    path: /add-note
+    defaults: {_controller: 'app.add_note.controller:invoke'}
+    methods: [POST]

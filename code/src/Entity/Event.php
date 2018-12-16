@@ -33,9 +33,6 @@ class Event
     /** @var Location */
     private $location;
 
-    /** @var array */
-    private $notes;
-
     public function __construct(
         string $title,
         int $number,
