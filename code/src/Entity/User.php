@@ -34,6 +34,9 @@ class User
     /** @var array */
     private $homeWorks;
 
+    /** @var User */
+    private $mentor;
+
     public function __construct(string $email)
     {
         $this->email = $email;
@@ -150,7 +153,11 @@ class User
      */
     public function getPhoto(): ?string
     {
-        return 'http://aa.swapp.ga/' . $this->photo;
+        if ($this->photo) {
+            return 'http://aa.swapp.ga/' . $this->photo;
+        }
+
+        return 'https://picsum.photos/272/272?image=' . mt_rand(0, 1056);
     }
 
     /**
@@ -196,6 +203,24 @@ class User
     public function setHomeWorks(array $homeWorks): User
     {
         $this->homeWorks = $homeWorks;
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getMentor(): ?User
+    {
+        return $this->mentor;
+    }
+
+    /**
+     * @param User $mentor
+     * @return User
+     */
+    public function setMentor(User $mentor): User
+    {
+        $this->mentor = $mentor;
         return $this;
     }
 }

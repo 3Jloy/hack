@@ -27,3 +27,8 @@ register_to_event:
     path: /register-event
     defaults: {_controller: 'app.register_to_event.controller:invoke'}
     methods: [POST]
+
+profile:
+    path: /profile
+    defaults: {_controller: 'app.profile.controller:invoke'}
+    methods: [GET]
