@@ -57,7 +57,7 @@ class RegisterEventService implements SecuredApplicationServiceInterface
 
 
         $event = $this->eventRepository->getEvent($eventId);
-        $currentUser = $this->userRepository->find(1);
+        $currentUser = $this->userRepository->findByEmail($user->getEmail());
         $currentUser->setName($userName);
         $currentUser->setSurname($userSurname);
         $userTicket = new EventTicket($currentUser, $event);
