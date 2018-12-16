@@ -22,3 +22,8 @@ resource_links:
     path: /resource-links
     defaults: {_controller: 'app.resource_links.controller:invoke'}
     methods: [GET]
+
+register_to_event:
+    path: /register-event
+    defaults: {_controller: 'app.register_to_event.controller:invoke'}
+    methods: [POST]

@@ -23,6 +23,8 @@ class EventTicket
     {
         $this->user = $user;
         $this->event = $event;
+        $this->is_confirmed = false;
+        $this->is_visited = false;
     }
 
     /**

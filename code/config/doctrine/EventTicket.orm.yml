@@ -6,3 +6,23 @@ App\Entity\EventTicket:
         id:
             type: integer
             generator: {strategy: AUTO}
+    fields:
+        is_confirmed:
+            type: boolean
+            options:
+                default: 0
+        is_visited:
+            type: boolean
+            options:
+                default: 0
+    manyToOne:
+        user:
+            targetEntity: App\Entity\User
+            joinColumn:
+                name: user
+                referencedColumnName: id
+        event:
+            targetEntity: App\Entity\Event
+            joinColumn:
+                name: event
+                referencedColumnName: id

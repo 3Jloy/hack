@@ -14,6 +14,17 @@ class EventTicketRepository extends ServiceEntityRepository
         parent::__construct($registry, EventTicket::class);
     }
 
+    /**
+     * @param EventTicket $eventTicket
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save(EventTicket $eventTicket)
+    {
+        $this->_em->persist($eventTicket);
+        $this->_em->flush();
+    }
+
     public function getUserTickets(User $user): array
     {
         return [];
