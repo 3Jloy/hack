@@ -45,7 +45,7 @@ class EventService implements SecuredApplicationServiceInterface
         $event = $this->eventRepository->getEvent($eventId);
         $currentUser = $this->userRepository->findByEmail($user->getEmail());
         /** @var EventTicket[] $userTickets */
-        $userTickets = $this->ticketRepository->getUserTickets($currentUser);
+        $userTickets = $this->ticketRepository->getUserTickets($currentUser, $event);
         $userTicket = null;
         if (isset($userTickets[0])) {
             $userTicket = [
