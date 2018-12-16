@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Event;
+use App\Entity\EventTicket;
 use App\Repository\EventRepository;
 use App\Repository\EventTicketRepository;
 use App\Repository\UserRepository;
@@ -38,8 +39,23 @@ class EventsService implements SecuredApplicationServiceInterface
         $events = $this->eventRepository->getEvents();
         $currentUser = $this->userRepository->findByEmail($user->getEmail());
         $userTickets = $this->ticketRepository->getUserTickets($currentUser);
+        if (!empty($userTickets)) {
+            $userTicketKeys = array_map(function (EventTicket $eventTicket) {
+                return $eventTicket->getEvent()->getId();
+            }, $userTickets);
+            $userTickets = array_map(function (EventTicket $eventTicket) {
+                return [
+                    'id' => $eventTicket->getId(),
+                    'is_confirmed' => $eventTicket->isConfirmed(),
+                    'is_visited' => $eventTicket->isVisited(),
+                ];
+            }, $userTickets);
+            $userTickets = array_combine($userTicketKeys, $userTickets);
+        }
+
+
         //todo: распределить билеты по пользователям и эвентам
-        $events = array_map(function (Event $event)  {
+        $events = array_map(function (Event $event) use($userTickets) {
             return [
                 'id' => $event->getId(),
                 'title' => $event->getTitle(),
@@ -64,7 +80,7 @@ class EventsService implements SecuredApplicationServiceInterface
                 'number' => $event->getNumber(),
                 'startDate' => $event->getStartDate()->getTimestamp(),
                 'endDate' => $event->getEndDate()->getTimestamp(),
-                'ticket' => null
+                'ticket' => $userTickets[$event->getId()] ?? null
             ];
         }, $events);
 

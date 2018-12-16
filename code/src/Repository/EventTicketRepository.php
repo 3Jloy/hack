@@ -27,6 +27,6 @@ class EventTicketRepository extends ServiceEntityRepository
 
     public function getUserTickets(User $user): array
     {
-        return [];
+        return $this->findBy(['user' => $user->getId()]);
     }
 }
