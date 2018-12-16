@@ -9,6 +9,7 @@ services:
         class: App\Controller\SecuredController
         arguments:
             - '@App\Service\MentorsService'
+#
     app.events.controller:
         class: App\Controller\SecuredController
         arguments:
@@ -17,3 +18,8 @@ services:
         class: App\Controller\SecuredController
         arguments:
             - '@App\Service\EventService'
+#
+    app.resource_links.controller:
+        class: App\Controller\SecuredController
+        arguments:
+            - '@App\Service\ResourceLinksService'

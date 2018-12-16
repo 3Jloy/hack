@@ -17,3 +17,8 @@ event:
     path: /event
     defaults: {_controller: 'app.event.controller:invoke'}
     methods: [GET]
+
+resource_links:
+    path: /resource-links
+    defaults: {_controller: 'app.resource_links.controller:invoke'}
+    methods: [GET]

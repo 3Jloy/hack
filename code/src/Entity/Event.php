@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 class Event
 {
     /** @var  */
@@ -50,7 +52,7 @@ class Event
         $this->startDate = $startDate;
         $this->endDate = $endDate;
         $this->description = $description;
-        $this->resources_links = $resources_links;
+        $this->resources_links = new ArrayCollection($resources_links);
         $this->location = $location;
     }
 
@@ -115,7 +117,7 @@ class Event
      */
     public function getResourcesLinks(): array
     {
-        return $this->resources_links;
+        return $this->resources_links->toArray();
     }
 
     /**
